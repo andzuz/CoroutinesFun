@@ -9,7 +9,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         getFirstPost()
     }
 
@@ -19,13 +18,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun onSuccess(postDto: PostDto?) {
         postDto?.let {
-            textView.text = "$postDto.userId"
+            runOnUiThread {
+                textView.text = "${postDto.userId}"
+            }
         }
     }
 
     private fun onFailure(errorMsg: String?) {
         errorMsg?.let {
-            textView.text = errorMsg
+            runOnUiThread {
+                textView.text = errorMsg
+            }
         }
     }
 
